@@ -3,14 +3,16 @@ import { Router } from '@angular/router';
 import { EnvironmentProviders, Injector } from '@angular/core';
 
 export class SweetAlert{
-    constructor(public router: Router){}
+    constructor(){}
 
     public mostrarMensajeError(titulo: string, mensaje: string)
     {
       Swal.fire({
         icon: "error",
         title: titulo,
-        text: mensaje,
+        text: mensaje, 
+        confirmButtonText: "ENTENDIDO",
+        confirmButtonColor: "#0d6efd",
       });
     }
 
@@ -20,7 +22,8 @@ export class SweetAlert{
         title: titulo,
         text: mensaje,
         icon: "success",
-        confirmButtonText: "Ok",
+        confirmButtonText: "HECHO",
+        confirmButtonColor: "#0e8c7e",
         allowOutsideClick: false,
         allowEscapeKey: false
       });
@@ -38,33 +41,17 @@ export class SweetAlert{
       });
     }
 
-    public mostrarMensajeExitoYNavegar(titulo: string, mensaje: string, ruta: string)
-    {
-      Swal.fire({
-        title: titulo,
-        text: mensaje,
-        icon: "success",
-        confirmButtonText: "Ok",
-        allowOutsideClick: false,
-        allowEscapeKey: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl(ruta);
-        }
-      });
-    }
-
     public mostrarMensajeConfirmar(titulo: string, mensaje: string)
     {
       return Swal.fire({
         title: titulo,
         text: mensaje,
-        icon: "question",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sí",
-        cancelButtonText: "No"
+        confirmButtonColor: "#0e8c7e",
+        cancelButtonColor: "#adb5bd",
+        confirmButtonText: "CONFIRMAR",
+        cancelButtonText: "CANCELAR"
       });
     }
 }

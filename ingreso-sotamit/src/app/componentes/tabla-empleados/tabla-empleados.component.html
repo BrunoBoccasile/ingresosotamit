@@ -1,0 +1,221 @@
+<app-spinner [ngClass]="claseSpinner"></app-spinner>
+
+@if (empleados && areas)
+{
+@if (empleados.length > 0)
+{
+
+<div class="table-responsive">
+    <table class="table table-striped w-100">
+        <thead>
+            <tr>
+                <th class="texto-retraido columna-dni">DNI</th>
+                <th class="texto-retraido columna-nombre">Nombre</th>
+                <th class="texto-retraido columna-nacimiento">Nacimiento</th>
+                <th class="texto-retraido columna-descripcion">Descripción</th>
+                <th class="texto-retraido columna-desarrollador">Desarrollador/a</th>
+                <th class="texto-retraido columna-area">Área</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @for (empleado of empleados; track $index){
+            @if(empleado.id)
+            {
+            <tr data-bs-toggle="modal" data-bs-target="#modalEmpleado" style="cursor: pointer;"
+                (click)="this.seleccionarEmpleado(empleado.id)" (click)="this.toggleModificar = false"
+                (click)="resetearFormModificarEmpleado()">
+                <th>{{empleado.dni}}</th>
+                <td class="texto-retraido">{{empleado.nombre}}</td>
+                <td class="texto-retraido">{{empleado.nacimiento | dateFormatPipe}}</td>
+                <td class="texto-retraido">{{empleado.descripcion}}</td>
+                <td class="texto-retraido">{{empleado.desarrollador | booleanPipe}}</td>
+                <td class="texto-retraido">{{this.obtenerNombreAreaPorId(empleado.id_area)}}</td>
+            </tr>
+            }
+            }
+        </tbody>
+    </table>
+</div>
+}
+@else
+{
+<div class="d-flex justify-content-center align-items-center flex-column p-4">
+    <h1>¡Ups!</h1>
+    <h3 class="m-2">No hay empleados para mostrar</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person-x-fill m-2" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708"/>
+      </svg>
+    <h5 class="m-2">Puede intentar dar de alta empleados en la sección Creación de empleado.</h5>
+</div>
+}
+}
+@else if (errorEnLaObtencionDeDatos)
+{
+<div class="d-flex justify-content-center align-items-center flex-column p-4">
+    <h1>¡Ups!</h1>
+    <h3 class="m-2">No se pudo obtener el listado de empleados</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-emoji-frown m-2"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+        <path
+            d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.5 3.5 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.5 4.5 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5" />
+    </svg>
+    <h5 class="m-2">Puede intentar recargando la página.</h5>
+</div>
+}
+
+
+
+<div class="modal fade" id="modalEmpleado" tabindex="-1" aria-labelledby="modalEmpleadoLabel" aria-hidden="true"
+    #modalDetalles>
+    <div class="modal-dialog modal-dialog-centered">
+        @if(!toggleModificar)
+        {
+        <div class="modal-content">
+            @if (empleadoSeleccionado)
+            {
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-4 w-75">Datos del empleado</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="fs-5">Nombre completo</h2>
+                <p>{{empleadoSeleccionado.nombre}}</p>
+                <hr>
+                <h2 class="fs-5">DNI</h2>
+                <p>{{empleadoSeleccionado.dni}}</p>
+                <hr>
+                <h2 class="fs-5">Fecha de nacimiento</h2>
+                <p>{{empleadoSeleccionado.nacimiento | dateFormatPipe}}</p>
+                <hr>
+                <h2 class="fs-5">Descripción</h2>
+                <p>{{empleadoSeleccionado.descripcion}}</p>
+                <hr>
+                <h2 class="fs-5">¿Es desarrollador/a?</h2>
+                <p>{{empleadoSeleccionado.desarrollador | booleanPipe}}</p>
+                <hr>
+                <h2 class="fs-5">Área a la que pertenece</h2>
+                <p>{{this.obtenerNombreAreaPorId(empleadoSeleccionado.id_area)}}</p>
+            </div>
+            }
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary mx-auto col-4"
+                    (click)="this.toggleModificar = true">Editar</button>
+                <button type="button" class="btn btn-danger mx-auto col-4" data-bs-dismiss="modal"
+                    (click)="eliminarEmpleadoSeleccionado()">Eliminar</button>
+            </div>
+        </div>
+        }
+        @else
+        {
+        <div class="modal-content">
+            <form [formGroup]="formModificarEmpleado" (ngSubmit)="enviarFormModificarEmpleado()">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3 w-75">Editar empleado</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <label for="nombre" class="fs-45">
+                            Nombre completo <span class="text-muted fs-6">({{empleadoSeleccionado.nombre}})</span>
+                        </label>
+                        <div class="input-group mt-1">
+                            <input appAutoFocus type="text" class="form-control" id="nombre" class="form-control"
+                                formControlName="nombre">
+                        </div>
+                        @if(nombre?.hasError('pattern'))
+                        {
+                        <ng-container>
+                            <small style="position: absolute;" class="text-danger">Debe estar compuesto sólo por letras
+                                (no más de 50)</small>
+                        </ng-container>
+                        }
+                    </div>
+                    <div class="mb-4">
+                        <label class="fs-45" for="dni">DNI <span
+                                class="text-muted fs-6">({{empleadoSeleccionado.dni}})</span></label>
+                        <div class="input-group mt-1">
+                            <input appAutoFocus type="number" class="form-control" id="dni" class="form-control"
+                                formControlName="dni">
+                        </div>
+                        @if(dni?.hasError('min'))
+                        {
+                        <ng-container>
+                            <small class="text-danger" style="position: absolute;">Debe ser mayor a cero</small>
+                        </ng-container>
+                        }
+                        @if(dni?.hasError('max'))
+                        {
+                        <ng-container>
+                            <small class="text-danger" style="position: absolute;">¡Es un número demasiado
+                                grande!</small>
+                        </ng-container>
+                        }
+                    </div>
+                    <div class="mb-4">
+                        <label for="fechaNacimiento" class="fs-45">Fecha de nacimiento <span
+                                class="text-muted fs-6">({{empleadoSeleccionado.nacimiento | dateFormatPipe
+                                }})</span></label>
+                        <div class="input-group mt-1">
+                            <input type="date" class="form-control" id="fechaNacimiento"
+                                formControlName="fechaNacimiento">
+                        </div>
+                        @if(fechaNacimiento?.hasError('menorDeEdad'))
+                        {
+                        <ng-container>
+                            <small class="text-danger" style="position: absolute;">Debe ser mayor de edad</small>
+                        </ng-container>
+                        }
+                    </div>
+                    <div class="mb-4">
+                        <label for="descripcion" class="fs-45">Descripción</label>
+                        <div class="input-group mt-1">
+                            <textarea class="form-control" placeholder={{empleadoSeleccionado.descripcion}}
+                                id="descripcion" class="form-control" formControlName="descripcion"></textarea>
+                        </div>
+                        @if(descripcion?.hasError('maxlength'))
+                        {
+                        <ng-container>
+                            <small class="text-danger" style="position: absolute;">Debe estar compuesta por no más de
+                                100 caracteres</small>
+                        </ng-container>
+                        }
+                    </div>
+                    <div class="mb-4">
+                        <label for="desarrollador" class="fs-45">¿Es desarrollador/a? <span
+                                class="text-muted fs-6">({{empleadoSeleccionado.desarrollador | booleanPipe
+                                }})</span></label>
+                        <div class="input-group mt-1">
+                            <select class="form-select" id="desarrollador" formControlName="desarrollador">
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="idArea" class="fs-45">Área a la que pertenece <span
+                                class="text-muted fs-6">({{obtenerNombreAreaPorId(empleadoSeleccionado.id_area)}})</span></label>
+                        <div class="input-group mt-1">
+                            <select class="form-select" id="idArea" formControlName="idArea">
+                                @for (area of areas; track $index)
+                                {
+                                <option value={{area.id}}>{{area.nombre}}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="boton-submit" type="submit" class="btn  btn-success col-4 mx-auto"
+                        data-bs-dismiss="modal" [disabled]="!formModificarEmpleado.valid">Hecho</button>
+                    <button type="button" class="btn btn-secondary col-4 mx-auto"
+                        (click)="resetearFormModificarEmpleado()"
+                        (click)="this.toggleModificar = false">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        }
+
+    </div>
+</div>

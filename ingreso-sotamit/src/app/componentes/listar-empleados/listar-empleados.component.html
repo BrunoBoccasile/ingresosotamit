@@ -1,46 +1,12 @@
-<app-spinner [ngClass]="claseSpinner"></app-spinner>
-
-<input type="number" [(ngModel)]="idEmpleado">
-<button (click)="buscarEmpleado()">buscar</button>
-
-@if (empleados)
-{
-<div class="card my-4">
-    <div class="card-body">
-        <h5 class="card-title">Administradores</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Listado</h6>
-
-
-
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">DNI</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Fecha de nacimiento</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Desarrollador</th>
-                        <th scope="col">Area</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @for (empleado of empleados; track $index){
-                    @if(empleado.id)
-                    {
-                    <tr>
-                        <th scope="row">{{empleado.dni}}</th>
-                        <td>{{empleado.nombre}}</td>
-                        <td>{{empleado.nacimiento | dateFormatPipe}}</td>
-                        <td>{{empleado.descripcion}}</td>
-                        <td>{{empleado.desarrollador}}</td>
-                        <td>{{empleado.id_area}}</td>
-                    </tr>
-                    }
-                    }
-                </tbody>
-            </table>
+<div class="fab-container d-flex flex-column align-items-center h-100 py-4" style="overflow-y: auto; max-height: 1000px;">
+    <div class="card col-lg-10 col-xl-8  col-11 col-md-10 col-sm-11 text-bg-light p-3 mb-2">
+        <h1 class="mx-auto">Listado de empleados</h1>
+        <hr class="hr-text">
+        <h5 class="mx-auto text-center text-muted">Puede gestionar empleados y ver sus detalles cliqueando sobre alguno de ellos.</h5>
+    </div>
+    <div class="card col-lg-10 col-xl-8  col-11 col-md-10 col-sm-11 mb-4 text-bg-light">
+        <div class="card-body">     
+            <app-tabla-empleados></app-tabla-empleados>
         </div>
     </div>
 </div>
-}

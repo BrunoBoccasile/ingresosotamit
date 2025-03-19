@@ -1,3 +1,17 @@
+:host {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #38ef7d, #11998e);
+}
+h1{
+    color: #0d574f;
+}
+
+.card {
+    border-radius: 12px;
+}
+
 .spinner-activado {
     position: fixed;
     top: 0;
@@ -11,6 +25,6 @@
     z-index: 9999;
 }
 
-.spinner-desactivado{
+.spinner-desactivado {
     display: none;
 }

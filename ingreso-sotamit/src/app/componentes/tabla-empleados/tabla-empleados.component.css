@@ -1,0 +1,79 @@
+.spinner-activado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner-desactivado {
+    display: none;
+}
+
+.texto-retraido {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+h1{
+    color: #0d574f;
+}
+
+.table {
+    table-layout: fixed
+}
+
+.columna-dni {
+    width: 13%;
+}
+
+.columna-nombre {
+    width: 25%;
+}
+
+.columna-nacimiento {
+    width: 15%;
+}
+
+.columna-descripcion {
+    width: 25%;
+}
+
+.columna-desarrollador {
+    width: 12%;
+}
+
+.columna-area {
+    width: 10%;
+}
+
+.btn {
+    text-transform: uppercase;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-verde{
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #0e8c7e; 
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #0b7568;
+    --bs-btn-border-color: #0e8c7e; 
+    --bs-btn-hover-border-color: #0b7568; 
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #096257;
+    --bs-btn-active-border-color: #096257;
+    --bs-btn-disabled-border-color: #096257;
+    --bs-btn-disabled-color: #ffffff;
+    --bs-btn-disabled-bg: #096257;
+}
+
+.fs-45{
+    font-size:large
+}

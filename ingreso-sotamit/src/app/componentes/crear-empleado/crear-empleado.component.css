@@ -2,12 +2,14 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: rgb(107,176,88);
-background: linear-gradient(90deg, rgba(107,176,88,1) 0%, rgba(226,226,216,1) 25%, rgba(214,223,224,1) 75%, rgba(110,170,104,1) 100%);
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+}
+.card {
+    border-radius: 12px;
 }
 
 .ng-invalid:not(form)  {
-    border-right: 5px solid hsl(0, 100%, 62%); 
+    border-right: 5px solid #e74c3c; 
   }
 
   .spinner-activado {
@@ -26,3 +28,38 @@ background: linear-gradient(90deg, rgba(107,176,88,1) 0%, rgba(226,226,216,1) 25
 .spinner-desactivado{
     display: none;
 }
+
+.btn-crear {
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #0e8c7e; 
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #0b7568;
+    --bs-btn-border-color: #0e8c7e; 
+    --bs-btn-hover-border-color: #0b7568; 
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #096257;
+    --bs-btn-active-border-color: #096257;
+    --bs-btn-disabled-border-color: #096257;
+    --bs-btn-disabled-color: #ffffff;
+    --bs-btn-disabled-bg: #096257;
+    
+    font-size: larger;
+    text-transform: uppercase;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-resetear{
+    --bs-btn-active-border-color: #00000000;
+    color: #0d574f;
+}
+
+
+.icono{
+    color: #096257;
+}
+
+h1{
+    color: #0d574f;
+}
+
