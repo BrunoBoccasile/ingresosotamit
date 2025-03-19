@@ -151,13 +151,13 @@ Estando en la ruta del proyecto de Angular, ejecutar "ng serve -o", lo cual inic
 • Para realizar el testing unitario del Front-End, ejecutar ng test estando en la ruta del proyecto de Angular.<br>
 
 ## Tiempo de realización por cada tarea (aproximación)
-• Back-End: 9 horas
-• Creación de base de datos: 0.5 horas
-• Front-End: 20 horas
-• Tests unitarios Front-End: 3 horas
-• Test unitarios Back-End: 4 horas
-• Documentación endpoints: 2 horas
-• Readme: 2 horas
+• Back-End: 9 horas<br>
+• Creación de base de datos: 0.5 horas<br>
+• Front-End: 20 horas<br>
+• Tests unitarios Front-End: 3 horas<br>
+• Test unitarios Back-End: 4 horas<br>
+• Documentación endpoints: 2 horas<br>
+• README: 2 horas<br>
 
 ## Ramas
 ### Rama de producción
